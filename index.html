@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>language selector</title>
+    <link rel="stylesheet" href="flags.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            height: 70px;
+            background-color: #499f69;
+        }
+        .languages-panel{
+            width: 100px;
+            height: 70px;
+            cursor: pointer;
+            float: right;
+            margin-right: 100px;
+            font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+        }
+        .languages-panel:hover{
+            background-color: #305E4D;
+        }
+        .languages-panel:hover>*{
+            display: block;
+        }
+        .language-item-current>*,.language-item>*{
+            display: inline-block;
+        }
+        .language-item-current{
+            height: 70px;
+            line-height: 70px;
+        }
+        .language-item{
+            height: 38px;
+            line-height: 38px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+            display: none;
+        }
+        .language-item:hover{
+            color: #499f69;
+        }
+        #language_img,.language-img{
+            position: relative;
+            margin-left: 14px;
+            top:2px;
+        }
+        #language_text,.language-text{
+            font-size: 14px;
+        }
+        #language_text{
+            color: white;
+            margin-left: 5px;
+        }
+        .language-text{
+            margin-left: 6px;
+        }
+        #arrow_down{
+            position: relative;
+            color: #ddd;
+            top: -2px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="languages-panel">
+        <div class="language-item-current">
+            <span id='language_img' class="language-img country-flag en"></span>
+            <span id="language_text">EN</span>
+            <span id="arrow_down">🞃</span>
+        </div>
+        <div class="language-item">
+            <span class='language-img country-flag en'></span>
+            <span class="language-text">EN</span>
+        </div>
+        <div class="language-item">
+            <span class='language-img country-flag cn'></span>
+            <span class="language-text">ZH</span>
+        </div>
+        <div class="language-item">
+            <span class='language-img country-flag jp'></span>
+            <span class="language-text">JP</span>
+        </div>
+    </div>
+</header>
+
+<script>
+    var elLanguageItems = document.querySelectorAll('.language-item');
+    var elCurrentImage = document.querySelector('#language_img');
+    var elCurrentText = document.querySelector('#language_text');
+    var currentImage = 'en';
+    var currentText = 'EN';
+    function setCurrentImageText() {
+        elCurrentImage.className = 'language-img country-flag ' + currentImage;
+        elCurrentText.innerHTML = currentText;
+    }
+    setCurrentImageText();
+    for(var i=0;i<elLanguageItems.length;i++){
+        elLanguageItems[i].onclick = function () {
+            var arr = this.children[0].className.split(' ');
+            currentImage = arr[arr.length-1];
+            currentText = this.children[1].innerHTML;
+            setCurrentImageText();
+            callback(currentText);
+        };
+    }
+    function callback(lan) {
+        //
+        console.log(lan);
+    }
+</script>
+</body>
+</html>
